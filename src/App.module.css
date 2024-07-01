@@ -1,0 +1,21 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+}
+
+.centerContent {
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameContainer {
+    border: 20px solid green;
+    border-radius: 25px;
+    height: 70vh;
+    width: 90%;
+}
