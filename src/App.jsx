@@ -14,7 +14,7 @@ function App() {
        <Tito/>
       </div>
       <div className={`${styles.gameContainer} ${styles.centerContent}`}>
-        <Bienvenida/>
+      <Bienvenida id={2} />
       </div>
       <div>
         <Itzel/>

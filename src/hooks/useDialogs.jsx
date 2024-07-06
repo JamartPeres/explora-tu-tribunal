@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import dialogosJson from '../components/cuadro-juego/dialogos/dialogos.json'; // Ajusta la ruta según tu estructura de archivos
+import dialogosJson from '../components/dialogos/dialogos.json'; // Ajusta la ruta según tu estructura de archivos
 
 const useDialogs = (scenario) => {
   const [dialog, setDialog] = useState([]);
