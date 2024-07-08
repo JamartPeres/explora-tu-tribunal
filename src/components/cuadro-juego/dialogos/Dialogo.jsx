@@ -23,3 +23,4 @@ Dialogo.propTypes = {
 export default Dialogo;
 
 
+

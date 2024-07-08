@@ -1,26 +1,113 @@
-
-
-import styles from './App.module.css'
-import Tito from './components/personajes/Tito.jsx'
-import Itzel from './components/personajes/Itzel.jsx'
-import Bienvenida from './components/cuadro-juego/escenarios/Bienvenida.jsx'
+import React, { useState, useEffect } from 'react';
+import styles from './App.module.css';
+import Tito from './components/personajes/Tito.jsx';
+import Itzel from './components/personajes/Itzel.jsx';
+import Bienvenida from './components/cuadro-juego/escenarios/Bienvenida.jsx';
+import dialogos from './components/cuadro-juego/dialogos/dialogos.json';
 
 function App() {
-  
+  const [dialogs, setDialogs] = useState([]);
+  const [currentDialogIndex, setCurrentDialogIndex] = useState(-1);
+  const [showDialog, setShowDialog] = useState(false);
+  const [titoAnimating, setTitoAnimating] = useState(false);
+  const [itzelAnimating, setItzelAnimating] = useState(false);
+  const [titoClickable, setTitoClickable] = useState(false);
+  const [itzelClickable, setItzelClickable] = useState(false);
+
+  useEffect(() => {
+    const id = 1; // Asume que siempre quieres los diálogos con id 1
+    const foundDialogs = dialogos.find(dialogo => dialogo.id === id);
+    if (foundDialogs) {
+      setDialogs(foundDialogs.dialogs);
+      setCurrentDialogIndex(-1);
+      setInitialCharacterState(foundDialogs.dialogs);
+    } else {
+      setDialogs([]);
+      setCurrentDialogIndex(-1);
+    }
+  }, []);
+
+  const setInitialCharacterState = (dialogs) => {
+    if (dialogs.length > 0) {
+      const firstCharacter = dialogs[0].character;
+      if (firstCharacter === 'Tito') {
+        setTitoAnimating(true);
+        setItzelAnimating(false);
+        setTitoClickable(true);
+        setItzelClickable(false);
+      } else {
+        setTitoAnimating(false);
+        setItzelAnimating(true);
+        setTitoClickable(false);
+        setItzelClickable(true);
+      }
+    }
+  };
+
+  const handleNext = () => {
+    if (currentDialogIndex < dialogs.length - 1) {
+      const nextIndex = currentDialogIndex + 1;
+      setCurrentDialogIndex(nextIndex);
+      setShowDialog(true); // Mostrar el cuadro de diálogo
+      updateCharacterState(nextIndex);
+    } else {
+      // Al llegar al último diálogo, detener ambas animaciones y desactivar clics
+      setTitoAnimating(false);
+      setItzelAnimating(false);
+      setTitoClickable(false);
+      setItzelClickable(false);
+    }
+  };
+
+  const handleCloseDialog = () => {
+    setShowDialog(false); // Cerrar el cuadro de diálogo
+  };
+
+  const updateCharacterState = (index) => {
+    if (index + 1 < dialogs.length) {
+      const nextCharacter = dialogs[index + 1].character;
+      if (nextCharacter === 'Tito') {
+        setTitoAnimating(true);
+        setItzelAnimating(false);
+        setTitoClickable(true);
+        setItzelClickable(false);
+      } else {
+        setTitoAnimating(false);
+        setItzelAnimating(true);
+        setTitoClickable(false);
+        setItzelClickable(true);
+      }
+    } else {
+      // Al llegar al último diálogo, detener ambas animaciones y desactivar clics
+      setTitoAnimating(false);
+      setItzelAnimating(false);
+      setTitoClickable(false);
+      setItzelClickable(false);
+    }
+  };
+
+  const currentDialog = dialogs[currentDialogIndex];
+  const isLastDialog = currentDialogIndex === dialogs.length - 1;
 
   return (
     <div className={styles.wrapper}>
       <div>
-       <Tito/>
+        <Tito isAnimating={titoAnimating} isClickable={titoClickable} onClick={handleNext} />
       </div>
       <div className={`${styles.gameContainer} ${styles.centerContent}`}>
-      <Bienvenida id={2} />
+        <Bienvenida
+          dialog={currentDialog}
+          onNext={handleNext}
+          showDialog={showDialog}
+          onCloseDialog={handleCloseDialog}
+          isLastDialog={isLastDialog}
+        />
       </div>
       <div>
-        <Itzel/>
+        <Itzel isAnimating={itzelAnimating} isClickable={itzelClickable} onClick={handleNext} />
       </div>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;

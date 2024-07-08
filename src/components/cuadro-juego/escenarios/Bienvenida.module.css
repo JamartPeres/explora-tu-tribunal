@@ -30,3 +30,17 @@
     background-color: #0056b3; /* Color de fondo del botón cuando se pasa el ratón por encima */
 }
 
+.continueButton {
+    margin-top: 1em;
+    padding: 0.5em 1em;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 0.25em;
+    cursor: pointer;
+  }
+  
+  .continueButton:hover {
+    background-color: #218838;
+  }
+  
