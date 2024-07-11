@@ -17,7 +17,8 @@ function Bienvenida({ dialog, onNext, showDialog, onCloseDialog, isLastDialog })
       {isLastDialog && (
         <button className={styles.continueButton} onClick={() => alert('Haz continuado a la siguiente sala')}>Continuar</button>
       )}
-      <button className={styles.nextButton} onClick={onNext}>Next</button>
+      {false && <button className={styles.nextButton} onClick={onNext}>Next</button>}
+
     </div>
   );
 }

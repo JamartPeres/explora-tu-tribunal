@@ -4,6 +4,7 @@ import Tito from './components/personajes/Tito.jsx';
 import Itzel from './components/personajes/Itzel.jsx';
 import Bienvenida from './components/cuadro-juego/escenarios/Bienvenida.jsx';
 import dialogos from './components/cuadro-juego/dialogos/dialogos.json';
+import InstruccionesPasillo from './components/InstruccionesPasillo.jsx';
 
 function App() {
   const [dialogs, setDialogs] = useState([]);
@@ -13,6 +14,7 @@ function App() {
   const [itzelAnimating, setItzelAnimating] = useState(false);
   const [titoClickable, setTitoClickable] = useState(false);
   const [itzelClickable, setItzelClickable] = useState(false);
+  const [showPopup, setShowPopup] = useState(true); // ESTA LÍNEA SE AGREGÓ
 
   useEffect(() => {
     const id = 1; // Asume que siempre quieres los diálogos con id 1
@@ -86,11 +88,16 @@ function App() {
     }
   };
 
+  const handlePopupClose = () => {
+    setShowPopup(false); //ESTA LÍNEA SE AGREGÓ
+  };
+
   const currentDialog = dialogs[currentDialogIndex];
   const isLastDialog = currentDialogIndex === dialogs.length - 1;
 
   return (
     <div className={styles.wrapper}>
+      {showPopup && <InstruccionesPasillo onClose={handlePopupClose} />} {/* ESTA LÍNEA SE AGREGÓ */}
       <div>
         <Tito isAnimating={titoAnimating} isClickable={titoClickable} onClick={handleNext} />
       </div>
