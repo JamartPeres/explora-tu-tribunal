@@ -5,6 +5,7 @@ import Itzel from './components/personajes/Itzel.jsx';
 import Bienvenida from './components/cuadro-juego/escenarios/Bienvenida.jsx';
 import dialogos from './components/cuadro-juego/dialogos/dialogos.json';
 import InstruccionesPasillo from './components/InstruccionesPasillo.jsx';
+import InstruccionesBienvenida from './components/InstruccionesBienvenida.jsx'
 
 function App() {
   const [dialogs, setDialogs] = useState([]);
@@ -97,7 +98,7 @@ function App() {
 
   return (
     <div className={styles.wrapper}>
-      {showPopup && <InstruccionesPasillo onClose={handlePopupClose} />} {/* ESTA LÍNEA SE AGREGÓ */}
+      {showPopup && <InstruccionesBienvenida onClose={handlePopupClose} />} {/* ESTA LÍNEA SE AGREGÓ */}
       <div>
         <Tito isAnimating={titoAnimating} isClickable={titoClickable} onClick={handleNext} />
       </div>

@@ -33,3 +33,11 @@
 .okButton:hover {
   background-color: #0056b3;
 }
+
+.characterImage {
+  position: absolute;
+  top: 10px; /* Ajusta la distancia desde la parte superior */
+  left: 10px; /* Ajusta la distancia desde la parte izquierda */
+  width: 50px; /* Ajusta el tamaño de la imagen del personaje */
+  height: auto;
+}

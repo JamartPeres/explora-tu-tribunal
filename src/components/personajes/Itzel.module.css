@@ -33,3 +33,7 @@
 .pulsing img {
     animation: pulse 1.5s infinite;
 }
+
+.character:hover img {
+    animation: none; /* Detiene la animación al pasar el mouse */
+}
